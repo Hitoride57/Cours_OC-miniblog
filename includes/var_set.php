@@ -1,0 +1,1 @@
+// Fichier de définition des variables récurrentes
