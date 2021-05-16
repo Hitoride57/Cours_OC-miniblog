@@ -13,7 +13,7 @@ Détails de la structure des tables :
     - contenu (text)
     - datecreation (datetime)
 
-- Chams pour la table des commentaires ('commentaires' par défaut) :
+- Champs pour la table des commentaires ('commentaires' par défaut) :
     - id (int, primary, AI)
     - id_billet (int)
     - auteur (varchar 255)
