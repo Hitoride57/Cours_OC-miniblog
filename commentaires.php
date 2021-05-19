@@ -54,6 +54,17 @@
 
 <?php
     }
+?>
+    <form action=<?php echo $actual_link ?> method='post'>
+        Pseudo : <input type='text' name='pseudo' placeholder='Pseudo' <?php if (isset($pseudo)) { echo 'value=\'' . $pseudo . '\'';}?> required>
+        Message : <input type='text' name='nv_commentaire' placeholder='Votre commentaire' required>
+        <br />
+        <input type='submit' value='Envoyer le commentaire'>
+    </form>
+
+<?php
 }
 ?>
+
+
 </html>
