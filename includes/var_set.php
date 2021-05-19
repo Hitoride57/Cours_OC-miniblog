@@ -15,4 +15,19 @@ if (isset($_POST['nb_billet'])) {
 } else {
     $nb_billet = '5';
 }
+
+// Récupération de l'adresse de la page affichée
+$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+/*
+Conservation du pseudo en cas de commentaire précédemment posté
+Mérité peut-être une optimisation
+*/
+if (isset($_POST['pseudo'])) {
+    setcookie('pseudo', $_POST['pseudo'],  time() + 3600, null, null, false, true);
+    $pseudo = htmlspecialchars($_POST['pseudo']);
+} else if (isset($_COOKIE['pseudo'])) {
+    $pseudo = $_COOKIE['pseudo'];
+}
+
 ?>
