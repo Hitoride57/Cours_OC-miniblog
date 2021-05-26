@@ -16,6 +16,8 @@
     
     include('includes/db_call.php');
 
+    include('includes/add_comment.php');
+
     /* Contrôle de la présence d'un billet valide
      Ce test mérite d'être amélioré, pour l'instant on ne teste que la présence de la variable
      Il faut confirmer qu'on a bien une valeur numérique existante dans la table
@@ -28,15 +30,19 @@
         
         // Requête d'affichage de l'article sélectionné
 
-        $billet = $db_miniblog->query('SELECT id, auteur, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation FROM ' . $table_article . ' WHERE id=' . $id_billet);
+        $billet = $db_miniblog->query('SELECT id, auteur, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation FROM ' . $table_articles . ' WHERE id=' . $id_billet);
         
-        $billet = $billet->fetch();
+        $last_billet = $billet->fetch();
 ?>
     
-    <h3><?php echo $billet['titre'] . ' (Posté le ' . $billet['date_creation'] . ' par ' . $billet['auteur'] . ')'; ?></h3>
+    <h3><?php echo $last_billet['titre'] . ' (Posté le ' . $last_billet['date_creation'] . ' par ' . $last_billet['auteur'] . ')'; ?></h3>
     
-    <p><?php echo $billet['contenu']; ?></p>
+    <p><?php echo $last_billet['contenu']; ?></p>
 </div>
+
+<?php
+    $billet->closeCursor();
+?>
 
 <div>
 
@@ -54,12 +60,16 @@
 
 <?php
     }
+
+    $commentaires->closeCursor();
+
 ?>
     <form action=<?php echo $actual_link ?> method='post'>
-        Pseudo : <input type='text' name='pseudo' placeholder='Pseudo' <?php if (isset($pseudo)) { echo 'value=\'' . $pseudo . '\'';}?> required>
-        Message : <input type='text' name='nv_commentaire' placeholder='Votre commentaire' required>
+        Pseudo : <input type='text' name='pseudo' placeholder='Pseudo' <?php if (isset($pseudo)) { echo 'value=\'' . $pseudo . '\'';}?> required />
+        Message : <input type='text' name='nv_commentaire' placeholder='Votre commentaire' required />
         <br />
-        <input type='submit' value='Envoyer le commentaire'>
+        <input type='hidden' name='id_billet' value=<?php echo $id_billet ?> />
+        <input type='submit' value='Envoyer le commentaire' />
     </form>
 
 <?php
