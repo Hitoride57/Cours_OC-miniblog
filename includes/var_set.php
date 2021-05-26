@@ -5,7 +5,7 @@ Voir le fichier README.md pour la structure des tables
 */
 
 $db_name = 'test';                          // Nom de la base de données pour le miniblog
-$table_article = 'billets';                 // Nom de la table pour le stockage des billets
+$table_articles = 'billets';                 // Nom de la table pour le stockage des billets
 $table_commentaires = 'commentaires';       // Nom de la table pour le stockage des commentaires
 
 // Nombre de billets affichés par défaut en cas d'absence de choix précédent
@@ -21,7 +21,7 @@ $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 /*
 Conservation du pseudo en cas de commentaire précédemment posté
-Mérité peut-être une optimisation
+Mérite peut-être une optimisation
 */
 if (isset($_POST['pseudo'])) {
     setcookie('pseudo', $_POST['pseudo'],  time() + 3600, null, null, false, true);

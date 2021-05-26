@@ -14,9 +14,9 @@
 
     // Requête pour l'affichage des $nb_billet derniers articles
 
-    $last_billet = $db_miniblog->query('SELECT id, auteur, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation FROM ' . $table_article . ' ORDER BY date_creation DESC LIMIT 0,' . $nb_billet);
+    $last_billets = $db_miniblog->query('SELECT id, auteur, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation FROM ' . $table_articles . ' ORDER BY date_creation DESC LIMIT 0,' . $nb_billet);
 
-    while ($billet = $last_billet->fetch()) {
+    while ($billet = $last_billets->fetch()) {
 ?>
     <h3><?php echo $billet['titre'] . ' (Posté le ' . $billet['date_creation'] . ' par ' . $billet['auteur'] . ')'; ?></h3>
     <p>
@@ -26,6 +26,9 @@
     </p>
 <?php
     }
+
+    $last_billets->closeCursor();
+    
 ?>
     
 </div>
